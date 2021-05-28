@@ -244,7 +244,7 @@ impl TransactionEngine {
                         "chargeback" => engine.chargeback(row.tx, row.client),
                         _ => eprintln!("Unknown transaction type {}", row.op),
                     }
-                },
+                }
                 Err(e) => eprintln!("Invalid row: {}", e),
             }
         }
@@ -252,7 +252,10 @@ impl TransactionEngine {
     }
 
     fn from_csv(path: &str) -> Result<Self, Box<Error>> {
-        let reader = ReaderBuilder::new().trim(Trim::All).flexible(true).from_path(path)?;
+        let reader = ReaderBuilder::new()
+            .trim(Trim::All)
+            .flexible(true)
+            .from_path(path)?;
 
         Self::from_csv_reader(reader)
     }
